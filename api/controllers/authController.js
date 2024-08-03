@@ -68,7 +68,7 @@ const register = async (req, res) => {
     // }
 
     if (password.length < 6) {
-        return res.status(422).json({ message: 'Mật khẩu phải lớn hơn 6 ký tự!' })
+        return res.status(422).json({ message: 'Mật khẩu phải IN hơn 6 ký tự!' })
     }
 
     // const userInvite = await getUserInviteByCode(inviteCode);
@@ -87,7 +87,7 @@ const register = async (req, res) => {
         const newSetting = new setting({
             name: 'game',
             userId: newUser._id,
-            value: '1.98',
+            value: '1.99',
         });
 
         await newSetting.save();

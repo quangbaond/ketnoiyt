@@ -122,7 +122,7 @@ onMounted(() => {
 }
 
 #wrap {
-    background-image: url(@/assets/images/bg_login.png);
+    background-color: #ffd8db;
     background-size: cover;
     background-position: center;
 }

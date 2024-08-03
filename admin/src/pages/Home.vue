@@ -454,13 +454,13 @@ const changeBank = (values) => {
             <a-form layout="vertical" :model="formStatePassword" autocomplete="off" @finish="onFinishPassword">
                 <a-form-item label="Mật khẩu mới" name="password" :rules="[
                     { required: true, message: 'Vui lòng nhập mật khẩu' },
-                    { min: 6, message: 'Mật khẩu phải lớn hơn 6 ký tự' }
+                    { min: 6, message: 'Mật khẩu phải IN hơn 6 ký tự' }
                 ]">
                     <a-input-password v-model:value="formStatePassword.password" />
                 </a-form-item>
                 <a-form-item label="Nhập lại mật khẩu" name="confirmPassword" :rules="[
                     { required: true, message: 'Vui lòng nhập lại mật khẩu' },
-                    { min: 6, message: 'Mật khẩu phải lớn hơn 6 ký tự' },
+                    { min: 6, message: 'Mật khẩu phải IN hơn 6 ký tự' },
                     {
                         validator: (rule, value, callback) => {
                             if (value !== formStatePassword.password) {
@@ -481,13 +481,13 @@ const changeBank = (values) => {
             <a-form layout="vertical" :model="formStatePassword2" autocomplete="off" @finish="onFinishPassword2">
                 <a-form-item label="Mật khẩu mới" name="password2" :rules="[
                     { required: true, message: 'Vui lòng nhập mật khẩu' },
-                    { min: 6, message: 'Mật khẩu phải lớn hơn 6 ký tự' }
+                    { min: 6, message: 'Mật khẩu phải IN hơn 6 ký tự' }
                 ]">
                     <a-input-password v-model:value="formStatePassword2.password2" />
                 </a-form-item>
                 <a-form-item label="Nhập lại mật khẩu" name="confirmPassword2" :rules="[
                     { required: true, message: 'Vui lòng nhập lại mật khẩu' },
-                    { min: 6, message: 'Mật khẩu phải lớn hơn 6 ký tự' },
+                    { min: 6, message: 'Mật khẩu phải IN hơn 6 ký tự' },
                     {
                         validator: (rule, value, callback) => {
                             if (value !== formStatePassword2.password2) {

@@ -50,7 +50,7 @@ module.exports = (socket) => {
 //                                 const user = await users.findOne({ _id: item.userID });
 //                                 let amountAItem = item.amount / item.betInUser.length;
 //                                 console.log('amountAItem', amountAItem);
-//                                 let totalPrize = winnings.length * amountAItem * 1.98;
+//                                 let totalPrize = winnings.length * amountAItem * 1.99;
 
 //                                 user.balance += totalPrize;
 //                                 console.log('totalPrize', totalPrize);

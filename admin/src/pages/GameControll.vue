@@ -40,10 +40,10 @@ const onFinishFailed = errorInfo => {
 // update data for table when get data from server
 const updateData = (data) => {
     const valueToMessage = {
-        1: "Lớn",
-        2: "Nhỏ",
-        3: "Lẻ",
-        4: "Chẵn"
+        1: "IN",
+        2: "OUT",
+        3: "DOWN",
+        4: "UP"
     };
 
     return data.map((item) => {
@@ -60,7 +60,7 @@ const updateData = (data) => {
         });
 
         // Ghép các message lại với nhau
-        // Ví dụ: "số đầu tiên: lớn\nsố thứ hai: nhỏ\nsố thứ ba: lẻ\nsố thứ tư: chẵn\nsố thứ năm: lớn"
+        // Ví dụ: "số đầu tiên: IN\nsố thứ hai: OUT\nsố thứ ba: DOWN\nsố thứ tư: UP\nsố thứ năm: IN"
 
         // Merge messages together
         // For example: "first number: large\n second number: small\n third number: odd\n fourth number: even\n third number: large"

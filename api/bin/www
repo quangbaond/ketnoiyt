@@ -207,7 +207,7 @@ const getGame = async (type = 'sx5d') => {
                   const user = await users.findOne({ _id: item.userID });
                   // let amountAItem = item.amount / item.betInUser.length;
                   const balanceInUser = user.balance;
-                  // let totalPrize = special.length * amountAItem * 1.98;
+                  // let totalPrize = special.length * amountAItem * 1.99;
                   // totalPrize sẽ được tính theo tỉ lệ 5% của tổng số tiền cược và trả lại số tiền cược
                   let totalPrize = item.amount * 0.05 + item.amount;
                   user.balance += totalPrize;
@@ -226,7 +226,7 @@ const getGame = async (type = 'sx5d') => {
 
                   const balanceInUser = user.balance;
                   // let amountAItem = item.amount / item.betInUser.length;
-                  // let totalPrize = Thua.length * amountAItem * 1.98;
+                  // let totalPrize = Thua.length * amountAItem * 1.99;
                   // tính ra 5% tổng số tiền cược
                   const totalPrize5 = item.amount * 0.01;
                   // user.balance - 5% tổng số tiền cược
@@ -249,7 +249,7 @@ const getGame = async (type = 'sx5d') => {
 
                   const balanceInUser = user.balance;
                   let amountAItem = item.amount / item.betInUser.length;
-                  let totalPrize = winnings.length * amountAItem * 1.98;
+                  let totalPrize = winnings.length * amountAItem * 1.99;
 
                   user.balance += totalPrize;
                   await user.save();

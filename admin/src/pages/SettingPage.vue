@@ -41,13 +41,13 @@ const formState = ref({
 });
 
 const formStateAll = ref({
-    value: '1.98',
+    value: '1.99',
 });
 
 const dataSource = ref([
     {
         name: 'game',
-        value: '1.98',
+        value: '1.99',
         userId: 1,
     },
 ]);
@@ -207,7 +207,7 @@ const onFinishAll = (values) => {
                             </a-form-item>
                             <a-form-item v-model:value="formState.value">
                                 <a-select v-model:value="formState.value" placeholder="Chọn giá trị">
-                                    <a-select-option value="1.98">1.98</a-select-option>
+                                    <a-select-option value="1.99">1.99</a-select-option>
                                     <a-select-option value="2.1">2.1</a-select-option>
                                 </a-select>
                             </a-form-item>
@@ -217,7 +217,7 @@ const onFinishAll = (values) => {
                         <a-form layout="vertical" :model="formStateAll" autocomplete="off" @finish="onFinishAll">
                             <a-form-item name="value">
                                 <a-select v-model:value="formStateAll.value" placeholder="Chọn giá trị">
-                                    <a-select-option value="1.98">1.98</a-select-option>
+                                    <a-select-option value="1.99">1.99</a-select-option>
                                     <a-select-option value="2.1">2.1</a-select-option>
                                 </a-select>
                             </a-form-item>
@@ -237,7 +237,7 @@ const onFinishAll = (values) => {
                             <div>
                                 <a-select v-if="editableData[record.key]"
                                     v-model:value="editableData[record.key][column.dataIndex]" style="margin: -5px 0">
-                                    <a-select-option value="1.98">1.98</a-select-option>
+                                    <a-select-option value="1.99">1.99</a-select-option>
                                     <a-select-option value="2.1">2.1</a-select-option>
                                 </a-select>
                                 <template v-else>

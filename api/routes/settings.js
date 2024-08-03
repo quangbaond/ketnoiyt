@@ -76,7 +76,7 @@ router.put('/:id', jwtMiddleware.verifyTokenAdmin, async (req, res, next) => {
 router.post('/', jwtMiddleware.verifyTokenAdmin, async (req, res, next) => {
     const { value, userId } = req.body;
 
-    if (!value || value !== '1.98'|| value !== '2.1') {
+    if (!value || value !== '1.99'|| value !== '2.1') {
         return res.status(400).send('Value is required');
     }
 

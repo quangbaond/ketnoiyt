@@ -82,36 +82,20 @@ onMounted(() => {
 
 <template>
     <div class="home">
-        <Header title="Trang chủ" />
-
-        <div class="slider">
-            <carousel :items-to-show="1" :autoplay="1500" :wrap-around="true">
-                <slide v-for="slide in slider" :key="slide">
-                    <div class="carousel__item">
-                        <img :src="slide.image" style="max-width: 100%;" />
-                    </div>
-                </slide>
-
-                <template #addons>
-                    <navigation />
-                    <pagination />
-                </template>
-            </carousel>
-        </div>
-        <div class="main">
-            <div class="navigation">
-                <a-space align="center" style="justify-content: space-between;display: flex;">
-                    <a-space direction="vertical">
-                        <a-typography-text>
-                            Chào mừng, <b class="notranslate ">{{ user.username }}</b>
-                        </a-typography-text>
-                        <!-- <a-typography-text>
+        <!-- <Header title="Trang chủ" /> -->
+        <div class="navigation" style="background-color: pink;">
+            <a-space align="center" style="justify-content: space-between;display: flex; ">
+                <a-space direction="vertical">
+                    <a-typography-text>
+                        <b class="notranslate ">ID: {{ user.id2 }}</b>
+                    </a-typography-text>
+                    <!-- <a-typography-text>
                             Số dư, <span style="font-size: 20px;" class="notranslate ">{{
                                 formattedBalanceUser }}</span>
                         </a-typography-text> -->
-                    </a-space>
-                    <a-space align="center" size="large">
-                        <!-- <a-space align="center" direction="vertical" @click="openLink(urlCskh?.url)">
+                </a-space>
+                <a-space align="center" size="large">
+                    <!-- <a-space align="center" direction="vertical" @click="openLink(urlCskh?.url)">
                             <img :src="iconDeposit" alt="" style="width: 30px">
                             <a-typography-text style="display: block; text-align: center; font-size: 10px;">
                                 Nạp tiền
@@ -129,13 +113,29 @@ onMounted(() => {
                                 Tài khoản
                             </a-typography-text>
                         </a-space> -->
-                        <a-typography-text>
-                            Số dư, <span style="font-size: 20px;" class="notranslate ">{{
-                                formattedBalanceUser }}</span>
-                        </a-typography-text>
-                    </a-space>
+                    <a-typography-text>
+                        Số dư, <span style="font-size: 20px;" class="notranslate ">{{
+                            formattedBalanceUser }}</span>
+                    </a-typography-text>
                 </a-space>
-            </div>
+            </a-space>
+        </div>
+        <div class="slider">
+            <carousel :items-to-show="1" :autoplay="1500" :wrap-around="true">
+                <slide v-for="slide in slider" :key="slide">
+                    <div class="carousel__item">
+                        <img :src="slide.image" style="max-width: 100%;" />
+                    </div>
+                </slide>
+
+                <template #addons>
+                    <navigation />
+                    <pagination />
+                </template>
+            </carousel>
+        </div>
+        <div class="main">
+
             <div class="list_game" style="margin-top: 10px;">
                 <!-- <a-space :size="[0, 0]" style="width: 100%;" class="list_game_item" wrap>
                     <div class="bg_game" v-for="game in listGame" :key="game.code"
@@ -178,8 +178,7 @@ onMounted(() => {
                         Trang chủ
                     </a-typography-text>
                 </a-space>
-                <a-space direction="vertical" @click="router.push('/trend')"
-                    style="cursor: pointer; gap: 5px">
+                <a-space direction="vertical" @click="router.push('/trend')" style="cursor: pointer; gap: 5px">
                     <!-- <img :src="iconHistoryBet" alt="" style="width: 20px;"> -->
                     <HistoryOutlined style="font-size: 16px;" />
                     <a-typography-text style="font-size: 16px; display: block;">
@@ -216,7 +215,7 @@ onMounted(() => {
     text-align: center;
     /* position: fixed; */
     bottom: 0;
-    max-width: 576px;
+    max-width: 444px;
     width: -webkit-fill-available;
     position: fixed;
     /* margin-top: 10px */

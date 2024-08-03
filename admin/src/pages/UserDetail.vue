@@ -178,7 +178,7 @@ const changePermission = (key, value) => {
                                 <a-form-item name="username" label="Họ và tên">
                                     <a-input v-model:value="formState.username" :rules="[
                                         { required: true, message: 'Vui lòng nhập họ và tên' },
-                                        { min: 6, message: 'Họ và tên phải lớn hơn 6 ký tự' }
+                                        { min: 6, message: 'Họ và tên phải IN hơn 6 ký tự' }
                                     ]" />
                                 </a-form-item>
                             </a-col>

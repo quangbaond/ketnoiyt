@@ -54,7 +54,7 @@ const intSettingGame = async () => {
 
     await settings.create({
         name: 'game',
-        value: '1.98',
+        value: '1.99',
         userId: '666c067a4f8e7dfa90f6ca4a'
     })
 

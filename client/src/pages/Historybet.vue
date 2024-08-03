@@ -69,10 +69,10 @@ const pagination = ref(
 
 const updateData = (data) => {
     const valueToMessage = {
-        1: "Lớn",
-        2: "Nhỏ",
-        3: "Lẻ",
-        4: "Chẵn"
+        1: "IN",
+        2: "OUT",
+        3: "DOWN",
+        4: "UP"
     };
 
     return data.map((item) => {
@@ -183,8 +183,7 @@ const changePagination = (page) => {
             <a-space align="center" style="display: flex; justify-content: space-around;">
                 <HomeOutlined style="color: #000; font-size: 25px; display: block;" @click="router.push('/')" />
                 <a-avatar :size="64" :src="staticUrl + user.avatar" :alt="user.username"></a-avatar>
-                <a-typography.Title style="color: #000; font-size: 18px;" class="notranslate ">{{ user.username
-                    }}</a-typography.Title>
+                <a-typography.Title style="color: #000; font-size: 18px;" class="notranslate ">{{ user.id2}}</a-typography.Title>
             </a-space>
         </div>
 

@@ -20,7 +20,7 @@ const router = useRouter()
 
 const codeInParam = router.currentRoute.value.params.code
 const setting = ref({
-    value: '1.98'
+    value: '1.99'
 })
 console.log(codeInParam);
 onMounted(() => {
@@ -73,7 +73,13 @@ const formatNumber = () => {
     amount.value = amount.value.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
-const betData = ref([0, 2, 2, 3, 4])
+const betData = ref([
+    Math.floor(Math.random() * 9),
+    Math.floor(Math.random() * 9),
+    Math.floor(Math.random() * 9),
+    Math.floor(Math.random() * 9),
+    Math.floor(Math.random() * 9),
+])
 const resetBet = () => {
     betInUser.value = []
     amount.value = ''
@@ -130,12 +136,15 @@ watch(() => user.value, (value) => {
 })
 
 const onBetItem = (id, value) => {
-    if (betInUser.value.findIndex(item => item.id === id && item.value === value) > -1) {
-        const index = betInUser.value.findIndex(item => item.id === id && item.value === value)
+    if (betInUser.value.findIndex(item => item.id === id) > -1) {
+        const index = betInUser.value.findIndex(item => item.id === id)
         betInUser.value.splice(index, 1)
+        betInUser.value.push({ id, value })
     } else {
         betInUser.value.push({ id, value })
     }
+    // chỉ được chọn 1
+
 }
 const onAmount = (value) => {
     if (value === 'all') {
@@ -193,6 +202,10 @@ watch(() => visible.value, (value) => {
         getHistoryBet(codeInParam)
     }
 })
+
+const changeRoom = (code) => {
+    window.location.href = `/game/${code}`
+}
 
 </script>
 
@@ -268,12 +281,24 @@ watch(() => visible.value, (value) => {
                 </a-col> -->
             </a-row>
             <div
-                style="text-align: center; width: 25px; margin: auto; background-color: rgb(245 167 173); height: 25px; display: flex; justify-content: center;">
+                style="text-align: center; width: 25px; margin: auto;  height: 25px; display: flex; justify-content: center;">
                 <ArrowDownOutlined style="font-size: 15px; font-weight: 900; align-self: center;" @click="showModal" />
             </div>
         </div>
-
-
+        <a-row style="justify-content: center;">
+            <a-col :span="8" style="text-align: center;">
+                <a-button :class="{ 'primary' : codeInParam == 'sx5d'}" @click="changeRoom('sx5d')"
+                    style="margin-top: 10px;">Phòng 1</a-button>
+            </a-col>
+            <a-col :span="8" style="text-align: center;">
+                <a-button :class="{ 'primary': codeInParam == 'xs2' }" @click="changeRoom('xs2')"
+                    style="margin-top: 10px;">Phòng 2</a-button>
+            </a-col>
+            <a-col :span="8" style="text-align: center;">
+                <a-button :class="{'primary': codeInParam === 'veso' }" @click="changeRoom('veso')"
+                    style="margin-top: 10px;">Phòng 3</a-button>
+            </a-col>
+        </a-row>
         <div class="bet_wrap">
             <div class="bet">
                 <a-typography-text
@@ -286,10 +311,10 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 0 && item.value === 1) > -1 }"
                             @click="onBetItem(0, 1)">
                             <a-typography-text style=" font-size: 16px; display: block; text-align: center;">
-                                Lớn
+                                IN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                {{ codeInParam === 'sx5d' ? setting.value : '1.98' }}
+                                {{ codeInParam === 'sx5d' ? setting.value : '1.99' }}
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -298,34 +323,32 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 0 && item.value === 2) > -1 }"
                             @click="onBetItem(0, 2)">
                             <a-typography-text style=" font-size: 16px; display: block; text-align: center;">
-                                Nhỏ
+                                OUT
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                {{ codeInParam === 'sx5d' ? setting.value : '1.98' }}
+                                {{ codeInParam === 'sx5d' ? setting.value : '1.99' }}
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 0 && item.value === 3) > -1 }"
-                            @click="onBetItem(0, 3)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 0 && item.value === 3) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đơn
+                                UP
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 0 && item.value === 4) > -1 }"
-                            @click="onBetItem(0, 4)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 0 && item.value === 4) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đôi
+                                DOWN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -342,10 +365,10 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 1 && item.value === 1) > -1 }"
                             @click="onBetItem(1, 1)">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Lớn
+                                IN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -354,34 +377,32 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 1 && item.value === 2) > -1 }"
                             @click="onBetItem(1, 2)">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Nhỏ
+                                OUT
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 1 && item.value === 3) > -1 }"
-                            @click="onBetItem(1, 3)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 1 && item.value === 3) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đơn
+                                UP
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 1 && item.value === 4) > -1 }"
-                            @click="onBetItem(1, 4)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 1 && item.value === 4) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đôi
+                                DOWN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -398,10 +419,10 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 2 && item.value === 1) > -1 }"
                             @click="onBetItem(2, 1)">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Lớn
+                                IN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -410,34 +431,32 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 2 && item.value === 2) > -1 }"
                             @click="onBetItem(2, 2)">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Nhỏ
+                                OUT
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 2 && item.value === 3) > -1 }"
-                            @click="onBetItem(2, 3)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 2 && item.value === 3) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đơn
+                                UP
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 2 && item.value === 4) > -1 }"
-                            @click="onBetItem(2, 4)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 2 && item.value === 4) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đôi
+                                DOWN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -454,10 +473,10 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 3 && item.value === 1) > -1 }"
                             @click="onBetItem(3, 1)">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Lớn
+                                IN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -466,40 +485,38 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 3 && item.value === 2) > -1 }"
                             @click="onBetItem(3, 2)">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Nhỏ
+                                OUT
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 3 && item.value === 3) > -1 }"
-                            @click="onBetItem(3, 3)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 3 && item.value === 3) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đơn
+                                UP
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 3 && item.value === 4) > -1 }"
-                            @click="onBetItem(3, 4)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 3 && item.value === 4) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đôi
+                                DOWN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                 </a-row>
             </div>
-            <div class="bet">
+            <div class="bet" style="margin-bottom: 100px;">
                 <a-typography-text
                     style="font-size: 16px; display: block; font-weight: 600; text-align: center; margin-bottom: 10px;">
                     Quả bóng thứ 5
@@ -510,10 +527,10 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 4 && item.value === 1) > -1 }"
                             @click="onBetItem(4, 1)">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Lớn
+                                IN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -522,90 +539,32 @@ watch(() => visible.value, (value) => {
                             :class="{ 'onBet': betInUser.findIndex(item => item.id === 4 && item.value === 2) > -1 }"
                             @click="onBetItem(4, 2)">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Nhỏ
+                                OUT
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 4 && item.value === 3) > -1 }"
-                            @click="onBetItem(4, 3)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 4 && item.value === 3) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đơn
+                                UP
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
                     <a-col :span="6">
                         <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 4 && item.value === 4) > -1 }"
-                            @click="onBetItem(4, 4)">
+                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 4 && item.value === 4) > -1 }">
                             <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đôi
+                                DOWN
                             </a-typography-text>
                             <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
-                            </a-typography-text>
-                        </a-card>
-                    </a-col>
-                </a-row>
-            </div>
-            <div class="bet" style="margin: 20px 0; margin-bottom: 120px;">
-                <a-typography-text
-                    style="font-size: 16px; display: block; font-weight: 600; text-align: center; margin-bottom: 10px;">
-                    Tổng
-                </a-typography-text>
-                <a-row :gutter="10">
-                    <a-col :span="6">
-                        <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 5 && item.value === 1) > -1 }"
-                            @click="onBetItem(5, 1)">
-                            <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Lớn
-                            </a-typography-text>
-                            <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
-                            </a-typography-text>
-                        </a-card>
-                    </a-col>
-                    <a-col :span="6">
-                        <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 5 && item.value === 2) > -1 }"
-                            @click="onBetItem(5, 2)">
-                            <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Nhỏ
-                            </a-typography-text>
-                            <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
-                            </a-typography-text>
-                        </a-card>
-                    </a-col>
-                    <a-col :span="6">
-                        <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 5 && item.value === 3) > -1 }"
-                            @click="onBetItem(5, 3)">
-                            <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đơn
-                            </a-typography-text>
-                            <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
-                            </a-typography-text>
-                        </a-card>
-                    </a-col>
-                    <a-col :span="6">
-                        <a-card
-                            :class="{ 'onBet': betInUser.findIndex(item => item.id === 5 && item.value === 4) > -1 }"
-                            @click="onBetItem(5, 4)">
-                            <a-typography-text style="font-size: 16px; display: block; text-align: center;">
-                                Đôi
-                            </a-typography-text>
-                            <a-typography-text style="font-size: 14px; display: block; text-align: center;">
-                                1.98
+                                1.99
                             </a-typography-text>
                         </a-card>
                     </a-col>
@@ -713,7 +672,12 @@ watch(() => visible.value, (value) => {
 <style>
 #game {
     /* background-color: rgb(255 216 219 / 1); */
-    min-height: 100vh;
+    /* min-height: 100vh; */
+}
+.primary {
+    background-color: rgb(245 167 173) !important;
+    border: 1px solid rgb(245 167 173) !important;
+    color: #fff !important;
 }
 
 .bet_wrap {
@@ -785,7 +749,7 @@ watch(() => visible.value, (value) => {
 }
 
 .ant-card {
-    background-color: rgb(245 167 173);
+    background-color: #fff;
     border: 1px solid rgb(245 167 173);
 }
 
@@ -795,8 +759,8 @@ watch(() => visible.value, (value) => {
 }
 
 .onbet {
-    background-color: rgb(245 167 173);
-        border: 1px solid rgb(245 167 173);
+    background-color: rgb(245 167 173) !important;
+    border: 1px solid rgb(245 167 173);
     /* margin: 10px; */
     padding: 10px;
     /* border-radius: 15px; */
@@ -806,6 +770,10 @@ watch(() => visible.value, (value) => {
     max-width: 444px;
     width: -webkit-fill-available;
     position: fixed;
+}
+.onBet {
+    background-color: rgb(245 167 173) !important;
+    color: #fff;
 }
 
 /* background-color: rgb(19, 34, 53);

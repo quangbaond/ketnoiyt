@@ -36,7 +36,7 @@ const changeCode = (value) => {
 
 <template>
     <div class="trend">
-        <Header title="xu huong" />
+        <Header title="Xu hướng" />
         <a-row style="justify-content: space-around; display: flex; margin-bottom: 10px;">
             <a-col :span="6">
                 <a-button @click="changeCode('sx5d')">Phòng 1</a-button>
@@ -79,8 +79,7 @@ const changeCode = (value) => {
             <a-space align="center" style="display: flex; justify-content: space-around;">
                 <HomeOutlined style="color: #000; font-size: 25px; display: block;" @click="router.push('/')" />
                 <a-avatar :size="64" :src="staticUrl + user.avatar" :alt="user.username"></a-avatar>
-                <a-typography.Title style="color: #000; font-size: 18px;" class="notranslate ">{{ user.username
-                    }}</a-typography.Title>
+                <a-typography.Title style="color: #000; font-size: 18px;" class="notranslate ">{{ user.id2}}</a-typography.Title>
             </a-space>
         </div>
 
